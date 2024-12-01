@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<script src="https://kit.fontawesome.com/a14ae32021.js" crossorigin="anonymous"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>This one is for my Tanu</title>
+
+	<style type="text/css">
+		@font-face {
+			font-family: digit;
+			src: url('digital-7_mono.ttf') format("truetype");
+		}
+
+		.hidden {
+			display: none;
+		}
+	</style>
+	<link href="css/default.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/garden.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+	<div id="codeInputDiv" class="flex flex-col items-center justify-center h-screen">
+		<h1 class="text-3xl font-bold mb-4">Enter the Secret Code</h1>
+		<input id="codeInput" type="text" placeholder="Enter the code"
+			class="border-2 border-gray-300 rounded-md px-4 py-2 text-lg">
+		<button id="submitButton" class="bg-blue-500 text-white px-6 py-2 rounded-md mt-4 hover:bg-blue-600">
+			Submit
+		</button>
+	</div>
+
+	<div id="mainDiv" class="hidden w-full max-w-4xl mx-auto text-center p-4">
+		<div id="loveHeart" class="flex justify-center items-center mx-auto">
+			<canvas id="garden" class="w-full h-auto"></canvas>
+			<div id="words">
+				<div id="messages" class="text-3xl font-bold text-red-500">
+					<div id="elapseClock" class="mt-2 ml-10 text-lg text-gray-700"></div>
+				</div>
+				<div id="loveu" class="mb-4 text-2xl text-pink-600">
+					I LOVE YOU SO MUCH<br />
+					<div class="signature text-lg text-gray-500 mt-2">- Sid</div>
+				</div>
+			</div>
+		</div>
+
+		<br>
+		<div id="content" class="mt-54 scroll-auto mb-20">
+			<div id="code" class="text-left text-gray-800 text-xl px-4">
+				<span class="comments">/**</span>
+				<div class="space">
+					<span class="comments text-5xl mt-20">*THE CODE OF LOVE</span>
+				</div>
+				<span class="comments">*/</span>
+				<h6 class="text-5xl text-blue-500 font-bold mt-4">Hey Girl !</h6>
+				<div class="text-4xl mt-4 overflow-auto">
+					<p>Do you remember the day we first met?</p>
+					<p class="comments">// The ET-LAB Friday.</p>
+					<p>Since that day a spark begun;</p>
+					<p class="comments">// Your face, Your Voice, Your Words.</p>
+					<p>Your everything got imprinted in my heart;</p>
+					<p>As time went on;</p>
+					<p>The bond grew stronger and stronger;</p>
+					<p>Journey from Infatuation to Love;</p>
+					<p>We have traveled a long way together;</p>
+					<p>There have been fights;</p>
+					<p class="comments">// And I'm sure there will be more.</p>
+					<p>But our bond will always grow back stronger;</p>
+					<p class="mt-6">All I want to say is:</p>
+					<p class="mt-4">Baby, I will love you forever;</p>
+					<p class="mt-6">Now, if you want to hug me, you can touch the heart below</p>
+				</div>
+				<div id="heartspan" class="block text-center mt-4">
+					<a href="image.jpg">
+						<i
+							class="fas fa-heart text-red-500 text-6xl hover:text-red-600 transition-transform transform hover:scale-110"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		// Function to check the code
+		document.getElementById("submitButton").addEventListener("click", function () {
+			const enteredCode = document.getElementById("codeInput").value;
+			if (enteredCode === "sudishka") {
+				// Hide the input field and show the main content
+				document.getElementById("codeInputDiv").classList.add("hidden");
+				document.getElementById("mainDiv").classList.remove("hidden");
+
+				// Heart animation setup
+				var offsetX = $("#loveHeart").width() / 2;
+				var offsetY = $("#loveHeart").height() / 2 - 55;
+				var together = new Date();
+				together.setFullYear(2021, 9, 26);
+				together.setHours(16);
+				together.setMinutes(30);
+				together.setSeconds(0);
+				together.setMilliseconds(0);
+
+				if (!document.createElement('canvas').getContext) {
+					var msg = document.createElement("div");
+					msg.id = "errorMsg";
+					msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
+					document.body.appendChild(msg);
+					$("#code").css("display", "none");
+					$("#copyright").css("position", "absolute");
+					$("#copyright").css("bottom", "10px");
+					document.execCommand("stop");
+				} else {
+					setTimeout(function () {
+						startHeartAnimation();
+					}, 5000);
+
+					timeElapse(together);
+					setInterval(function () {
+						timeElapse(together);
+					}, 500);
+
+					adjustCodePosition();
+					$("#code").typewriter();
+				}
+			} else {
+				alert("Wrong code! Please try again.");
+			}
+		});
+	</script>
+</body>
+
+</html>
