@@ -71,37 +71,48 @@ function startHeartAnimation() {
 }
 
 (function ($) {
-	$.fn.typewriter = function () {
-		this.each(function () {
-			var $ele = $(this),
-				str = $ele.html(),
-				progress = 0;
-			$ele.html('');
-			var timer = setInterval(function () {
-				var current = str.substr(progress, 1);
-				if (current == '<') {
-					progress = str.indexOf('>', progress) + 1;
-				} else {
-					progress++;
-				}
-				$ele.html(str.substring(0, progress) + (progress & 1 ? '_' : ''));
+    $.fn.typewriter = function () {
+        this.each(function () {
+            var $ele = $(this),
+                str = $ele.html(),
+                progress = 0;
 
-				// Scroll to the current text
-				$ele[0].scrollIntoView({
-					behavior: 'smooth',
-					block: 'nearest',
-					inline: 'start',
-				
-				});
+            $ele.html(''); // Clear the content initially
 
-				if (progress >= str.length) {
-					clearInterval(timer);
-				}
-			}, 10	);
-		});
-		return this;
-	};
+            // Start the typing effect
+            var timer = setInterval(function () {
+                var current = str.substr(progress, 1);
+
+                if (current === '<') {
+                    progress = str.indexOf('>', progress) + 1; // Skip HTML tags
+                } else {
+                    progress++;
+                }
+
+                $ele.html(str.substring(0, progress) + (progress & 1 ? '_' : ''));
+
+                // Scroll the page down gradually
+                window.scrollBy({
+                    top: 2, // Change this value to adjust scroll speed
+                    behavior: 'smooth',
+                });
+
+                if (progress >= str.length) {
+                    clearInterval(timer); // Stop when the text is fully typed
+                    $ele.html(str); // Remove blinking cursor
+                }
+            }, 5); // Adjust typing speed
+        });
+
+        return this;
+    };
 })(jQuery);
+
+// Apply the typewriter effect
+$(document).ready(function () {
+    $('#letterContent').typewriter();
+});
+
 
 
 function timeElapse(date) {
